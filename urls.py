@@ -58,6 +58,9 @@ urlpatterns += patterns('',
 
     # url("^$", "mezzanine.blog.views.blog_post_list", name="home"),
 
+    # Include for RSVP app
+    (r"^rsvp/", include('rsvp.urls')),
+
     # MEZZANINE'S URLS
     # ----------------
     # ADD YOUR OWN URLPATTERNS *ABOVE* THE LINE BELOW.
