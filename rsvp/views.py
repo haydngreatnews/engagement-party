@@ -9,11 +9,16 @@ def index(request):
 def respond(request, invite_id):
   return HttpResponse("This is the specfic response form for invite {0}".format(invite_id))
 
-def search(request, query):
+def search(request):
+  qry = request.GET.get('q', '')
+  resultset = []
+  result = dict()
+  result["match"] = "name"
+  result["name"] = "Errol & Rosie"
+  result["informal"] = "Mum & Dad"
+  result["invite_id"] = 8
+  result["search_string"] = qry
+  resultset.append(result)
+  resultset.append(result)
 
-  return HttpResponse("""[{
-    "match": "name",
-    "name": "Errol & Rosie",
-    "informal" : "Mum & Dad",
-    "invite_id" : 8
-    }]""")
+  return HttpResponse(json.dumps(resultset))
