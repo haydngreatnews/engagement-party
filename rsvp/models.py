@@ -11,9 +11,9 @@ class Invite(models.Model):
   postcode = models.CharField(max_length=255)
   number_invited = models.IntegerField(default=1)
   invite_sent = models.BooleanField(default=False)
-  rsvp = models.DateTimeField(default=None, null=True)
-  attending = models.BooleanField(default=False)
-  number_attending = models.IntegerField(default=None, null=True)
+  rsvp = models.DateTimeField(default=None, null=True, blank=True)
+  attending = models.BooleanField(default=False, blank=True)
+  number_attending = models.IntegerField(default=None, null=True, blank=True)
 
   def process_rsvp(self, attending, number_attending):
     self.attending = attending

@@ -1,3 +1,11 @@
 from django.contrib import admin
+from . import models
 
-# Register your models here.
+class InviteAdmin(admin.ModelAdmin):
+  exclude = ('rsvp', 'attending', 'number_attending')
+  list_display = ('name','informal_name', 'rsvp', 'number_attending')
+  #list_filter = ('
+  search_fields = ['name', 'informal_name']
+
+admin.site.register(models.Invite, InviteAdmin)
+admin.site.register(models.Alert)
