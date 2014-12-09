@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Q
 from datetime import datetime
 import django.utils.timezone
 
@@ -26,6 +27,14 @@ class Invite(models.Model):
         Alert.objects.create(reason=reason, invite=self)
     self.save()
     return;
+
+  @staticmethod
+  def search(query):
+    """Returns a queryset with all the invites
+    where the name or informal_name starts with
+    the query string"""
+    clause = Q(name__startswith=query) | Q(informal_name__startswith=query)
+    return Invite.objects.all().filter(Q(rsvp=None), clause)
 
 class Alert(models.Model):
   reason = models.TextField()
