@@ -34,6 +34,8 @@ class Invite(models.Model):
     where the name or informal_name starts with
     the query string"""
     clause = Q(name__startswith=query) | Q(informal_name__startswith=query)
+    spacequery = ' '+query
+    clause = clause | Q(name__contains=spacequery) | Q(informal_name__contains=spacequery)
     return Invite.objects.all().filter(Q(rsvp=None), clause)
 
 class Alert(models.Model):

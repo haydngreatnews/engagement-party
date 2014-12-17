@@ -1,1 +1,42 @@
 {% extends "base.html" %}
+{% load staticfiles %}
+
+{% block left_wrapper %}
+{% endblock %}
+{% block tail_js %}
+<script src="{% static "js/bloodhound.js" %}"></script>
+<script src="{% static "js/bootstrap3-typeahead.js" %}"></script>
+<script>
+var invites = new Bloodhound({
+  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+  queryTokenizer: Bloodhound.tokenizers.whitespace,
+  prefetch: '',
+  remote: '/rsvp/search.json?q=%QUERY'
+});
+console.log('bloodhound done')
+invites.initialize();
+console.log($('input.typeahead'))
+$('input.typeahead').typeahead({
+  name: 'invites',
+  displayText: function(item){
+    if (item.informal !== item.name){
+      return item.name + ' - ' + item.informal;
+    } else {
+      return item.name;
+    }
+  },
+  source: invites.ttAdapter()
+});
+console.log($('input.typeahead'))
+</script>
+{% endblock %}
+{% block main_col_size %}10{% endblock %}
+{% block main_class %}middle col-md-offset-1{% endblock %}
+{% block title %}{% block meta_title %}Find your invite{% endblock %}{% endblock %}
+{% block main %}
+<label for="query" class="col-md-12 text-center label-large sr-only">Find your invite</label>
+<input class="form-control input-lg typeahead" type="text" id="query" placeholder="Who's invited?"/>
+<input class="col-md-2 col-md-offset-5 btn btn-large form-inline" type="submit" id="query-submit" value="RSVP"/>
+
+
+{% endblock %}

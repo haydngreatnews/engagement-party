@@ -65,7 +65,7 @@
                         <span class="icon-bar"></span>
                     </button>
   {% if settings.SITE_TITLE %}<a class="navbar-brand" href="/">{{ settings.SITE_TITLE }}</a>{% endif %}
-    
+
 </div>
 <div class="navbar-collapse collapse">
        {% page_menu "pages/menus/dropdown.html" %}
@@ -146,13 +146,13 @@
     {% include "includes/user_panel.html" %}
     {% endnevercache %}
 	<aside class="right-sidebar">
-   
+
     {% block right_panel %}
     {% ifinstalled mezzanine.twitter %}
     {% include "twitter/tweets.html" %}
     {% endifinstalled %}
     {% endblock %}
-    
+
 	</aside>
 </div>
 {% endblock %}
@@ -181,7 +181,7 @@
 						<li><a title="" data-placement="top" href="#" data-original-title="Google plus"><i class="fa fa-google-plus"></i></a></li>
 					</ul>
 				</div>-->
-		
+
 
 </div>
 </div>
@@ -202,5 +202,6 @@
 <script src="{% static "js/custom.js"%}"></script>
 {% endcompress %}
 
+{% block tail_js %}{% endblock %}
 </body>
 </html>
