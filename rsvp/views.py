@@ -1,10 +1,12 @@
 from django.shortcuts import render,  render_to_response
 from django.http import HttpResponse
 from django.template import RequestContext
+from django.views.generic.edit import UpdateView
 
 import json
 
 from . import models
+from . import forms
 
 def index(request):
   context = RequestContext(request)
@@ -30,3 +32,9 @@ def search(request):
     resultset.append(result)
 
   return HttpResponse(json.dumps(resultset))
+
+class InviteReturnView(UpdateView):
+  template_name = 'rsvp_form.html'
+  model = models.Invite
+  form_class = forms.InviteForm
+  success_url = '/thanks/'

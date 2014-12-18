@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block left_wrapper %}
+{% endblock %}
+{% block main_col_size %}10{% endblock %}
+{% block main_class %}middle col-md-offset-1{% endblock %}
+{% block title %}{% block meta_title %}Let us know{% endblock %}{% endblock %}
+{% block main %}
+<h2>Hi, {{ form.instance.informal_name }}</h2>
+<form action="" method="post">
+  {% csrf_token %}
+  <fieldset class='attending-radio'>
+    <legend class='inline'>Will you be joining us at our engagement party?</legend>
+    {% for radio in form.attending %}
+    {{ radio }}
+    {% endfor %}
+  </fieldset>
+  <label>Save a place for {{ form.number_attending }} of us</label><br>
+  <input type="submit" value="Submit" />
+</form>
+{% endblock %}
+{% block tail_js %}
+<script>
+(function () {
+  var many = {{ form.instance.number_invited }} > 1
+  if(many){
+    $('.xwill').html("we'll");
+    $('.xsecondp').html("us");
+  }
+})()
+</script>
+{% endblock %}
