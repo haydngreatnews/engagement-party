@@ -2,6 +2,10 @@ from django.db import models
 from django.db.models import Q
 from datetime import datetime
 import django.utils.timezone
+from django.utils.text import slugify
+
+import hashlib
+import base64
 
 class Invite(models.Model):
   name = models.CharField(max_length=255)
@@ -15,6 +19,7 @@ class Invite(models.Model):
   rsvp = models.DateTimeField(default=None, null=True, blank=True)
   attending = models.BooleanField(default=False, blank=True)
   number_attending = models.IntegerField(default=None, null=True, blank=True)
+  slug = models.SlugField(blank=True)
 
   def process_rsvp(self, attending, number_attending):
     self.attending = attending
@@ -28,6 +33,15 @@ class Invite(models.Model):
     self.save()
     return;
 
+  def save(self, *args, **kwargs):
+    if not self.id:
+      slug_string = self.name + self.informal_name
+      sha = hashlib.sha256(slug_string.encode('utf-8'))
+      digest = base64.b64encode(sha.digest())
+      self.slug = slugify(digest.decode('ascii')[0:10])
+
+    super(Invite, self).save(*args, **kwargs)
+
   @staticmethod
   def search(query):
     """Returns a queryset with all the invites
@@ -37,6 +51,7 @@ class Invite(models.Model):
     spacequery = ' '+query
     clause = clause | Q(name__contains=spacequery) | Q(informal_name__contains=spacequery)
     return Invite.objects.all().filter(Q(rsvp=None), clause)
+
 
 class Alert(models.Model):
   reason = models.TextField()
