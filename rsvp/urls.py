@@ -9,4 +9,6 @@ urlpatterns = patterns('',
     url(r'^(?P<pk>\d+)/$', views.InviteReturnView.as_view(), name='invite_return'),
     # ex: /rsvp/search.json?q=Tom
     url(r'^search.json$', views.search, name='search'),
+    # ex: /rsvp/thanks/
+    url(r'^thanks', views.thanks, name='thanks'),
 )

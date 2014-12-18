@@ -1,7 +1,9 @@
 from django.shortcuts import render,  render_to_response
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
+from django.core.urlresolvers import reverse
 from django.views.generic.edit import UpdateView
+
 
 import json
 
@@ -12,9 +14,6 @@ def index(request):
   context = RequestContext(request)
   rendered = render_to_response('search.html', context)
   return rendered
-
-def respond(request, invite_id):
-  return HttpResponse("This is the specfic response form for invite {0}".format(invite_id))
 
 def search(request):
   qry = request.GET.get('q', '')
@@ -33,8 +32,13 @@ def search(request):
 
   return HttpResponse(json.dumps(resultset))
 
+def thanks(request):
+  return HttpResponseRedirect('./about-us')
+
 class InviteReturnView(UpdateView):
   template_name = 'rsvp_form.html'
   model = models.Invite
   form_class = forms.InviteForm
-  success_url = '/thanks/'
+
+  def get_success_url(self):
+    return reverse('thanks')

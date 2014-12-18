@@ -11,13 +11,15 @@
 <form action="" method="post">
   {% csrf_token %}
   <fieldset class='attending-radio'>
+    {{ form.attending.errors }}
     <legend class='inline'>Will you be joining us at our engagement party?</legend>
     {% for radio in form.attending %}
     {{ radio }}
     {% endfor %}
   </fieldset>
+  {{ form.number_attending.errors }}
   <label>Save a place for {{ form.number_attending }} of us</label><br>
-  <input type="submit" value="Submit" />
+  <input type="submit" value="Save" />
 </form>
 {% endblock %}
 {% block tail_js %}
