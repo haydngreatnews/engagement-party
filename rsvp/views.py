@@ -11,6 +11,9 @@ from . import models
 from . import forms
 
 def index(request):
+  if request.POST.get('slug',''):
+    return HttpResponseRedirect(reverse('invite_return', kwargs={'slug': request.POST.get('slug')}))
+
   context = RequestContext(request)
   rendered = render_to_response('search.html', context)
   return rendered
