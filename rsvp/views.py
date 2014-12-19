@@ -26,14 +26,17 @@ def search(request):
     result = {
       'name': invite.name,
       'informal': invite.informal_name,
-      'invite_id' : invite.id
+      'invite_id': invite.id,
+      'slug': invite.slug,
     }
     resultset.append(result)
 
   return HttpResponse(json.dumps(resultset))
 
 def thanks(request):
-  return HttpResponseRedirect('./about-us')
+  context = RequestContext(request)
+  rendered = render_to_response('thanks.html', context)
+  return rendered
 
 class InviteReturnView(UpdateView):
   template_name = 'rsvp_form.html'

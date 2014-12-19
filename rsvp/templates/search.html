@@ -13,10 +13,9 @@ var invites = new Bloodhound({
   prefetch: '',
   remote: '/rsvp/search.json?q=%QUERY'
 });
-console.log('bloodhound done')
 invites.initialize();
-console.log($('input.typeahead'))
-$('input.typeahead').typeahead({
+$input = $('input.typeahead')
+$input.typeahead({
   name: 'invites',
   displayText: function(item){
     if (item.informal !== item.name){
@@ -27,7 +26,12 @@ $('input.typeahead').typeahead({
   },
   source: invites.ttAdapter()
 });
-console.log($('input.typeahead'))
+$input.change(function(){
+    active = $input.typeahead('getActive');
+    if (active){
+        $('a#rsvp-link').attr('href', active.slug)
+    }
+});
 </script>
 {% endblock %}
 {% block main_col_size %}10{% endblock %}
@@ -37,6 +41,7 @@ console.log($('input.typeahead'))
 <label for="query" class="col-md-12 text-center label-large sr-only">Find your invite</label>
 <input class="form-control input-lg typeahead" type="text" id="query" placeholder="Who's invited?"/>
 <input class="col-md-2 col-md-offset-5 btn btn-large form-inline" type="submit" id="query-submit" value="RSVP"/>
+<a class="col-md-2 col-md-offset-5 btn btn-large" type="submit" id="rsvp-link">RSVP</a>
 
 
 {% endblock %}
