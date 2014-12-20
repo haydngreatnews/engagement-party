@@ -94,7 +94,8 @@ MANAGERS = ADMINS
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.libbyandhaydn.co.nz',
+                 '.haydnandlibby.co.nz']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -103,7 +104,7 @@ ALLOWED_HOSTS = []
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = None
+TIME_ZONE = 'Pacific/Auckland'
 
 # If you set this to True, Django will use timezone-aware datetimes.
 USE_TZ = True
@@ -165,11 +166,11 @@ FILE_UPLOAD_PERMISSIONS = 0o644
 DATABASES = {
     "default": {
         # Add "postgresql_psycopg2", "mysql", "sqlite3" or "oracle".
-        "ENGINE": "django.db.backends.",
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
         # DB name or path to database file if using sqlite3.
-        "NAME": "",
+        "NAME": "wedsite",
         # Not used with sqlite3.
-        "USER": "",
+        "USER": "wedsite",
         # Not used with sqlite3.
         "PASSWORD": "",
         # Set to empty string for localhost. Not used with sqlite3.
@@ -322,7 +323,7 @@ OPTIONAL_APPS = (
 #     "SSH_USER": "", # SSH username for host deploying to
 #     "HOSTS": ALLOWED_HOSTS[:1], # List of hosts to deploy to (eg, first host)
 #     "DOMAINS": ALLOWED_HOSTS, # Domains for public site
-#     "REPO_URL": "ssh://hg@bitbucket.org/user/project", # Project's repo URL
+#     "REPO_URL": "git@github.com:haydnnewport/engagement-party.git", # Project's repo URL
 #     "VIRTUALENV_HOME":  "", # Absolute remote path for virtualenvs
 #     "PROJECT_NAME": "", # Unique identifier for project
 #     "REQUIREMENTS_PATH": "requirements.txt", # Project's pip requirements
@@ -333,7 +334,6 @@ OPTIONAL_APPS = (
 #     "SECRET_KEY": SECRET_KEY,
 #     "NEVERCACHE_KEY": NEVERCACHE_KEY,
 # }
-
 
 ##################
 # LOCAL SETTINGS #
