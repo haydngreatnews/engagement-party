@@ -24,8 +24,11 @@ $input.typeahead({
       return item.name;
     }
   },
-  source: invites.ttAdapter()
+  source: invites.ttAdapter(),
+  minLength: 2,
+
 });
+
 $input.change(function(){
     active = $input.typeahead('getActive');
     if (active){

@@ -27,3 +27,25 @@ section.callaction {
 .dropdown-menu .active > a {
     background-color: #82B3FB;
 }
+
+footer {
+    padding-top: 10px;
+}
+
+#sub-footer {
+    padding-top: 0px;
+}
+
+#featured .flexslider {
+    margin: 10px 0 10px 0;
+}
+
+.typeahead.dropdown-menu {
+    width: 100%;
+    padding-right: 32px;
+}
+
+#id_number_attending {
+    width: 4em;
+    text-align: center;
+}
