@@ -7,33 +7,35 @@
 <script src="{% static "js/bloodhound.js" %}"></script>
 <script src="{% static "js/bootstrap3-typeahead.js" %}"></script>
 <script>
-var invites = new Bloodhound({
-  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
-  queryTokenizer: Bloodhound.tokenizers.whitespace,
-  prefetch: '',
-  remote: '/rsvp/search.json?q=%QUERY'
-});
-invites.initialize();
-$input = $('input.typeahead')
-$input.typeahead({
-  name: 'invites',
-  displayText: function(item){
-    if (item.informal !== item.name){
-      return item.name + ' - ' + item.informal;
-    } else {
-      return item.name;
-    }
-  },
-  source: invites.ttAdapter(),
-  minLength: 2,
+$('body').ready(function(){
+    var invites = new Bloodhound({
+      datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      prefetch: '',
+      remote: '/rsvp/search.json?q=%QUERY'
+    });
+    invites.initialize();
+    $input = $('input.typeahead')
+    $input.typeahead({
+      name: 'invites',
+      displayText: function(item){
+        if (item.informal !== item.name){
+          return item.name + ' - ' + item.informal;
+        } else {
+          return item.name;
+        }
+      },
+      source: invites.ttAdapter(),
+      minLength: 2,
 
-});
+    });
 
-$input.change(function(){
-    active = $input.typeahead('getActive');
-    if (active){
-        $('input#destination-slug').attr('value', active.slug)
-    }
+    $input.change(function(){
+        active = $input.typeahead('getActive');
+        if (active){
+            $('input#destination-slug').attr('value', active.slug)
+        }
+    });
 });
 </script>
 {% endblock %}
@@ -41,7 +43,7 @@ $input.change(function(){
 {% block main_class %}middle col-md-offset-1{% endblock %}
 {% block title %}{% block meta_title %}Find your invite{% endblock %}{% endblock %}
 {% block main %}
-<form action="/rsvp/" method="post">
+<form action="/rsvp/" method="post" autocomplete="off">
     {% csrf_token %}
     <label for="query" class="col-md-12 text-center label-large sr-only">Find your invite</label>
     <input class="form-control input-lg typeahead" type="text" id="query" placeholder="Who's invited?">
