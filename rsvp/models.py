@@ -31,7 +31,7 @@ class Invite(models.Model):
           self.name, number_attending, self.number_invited)
         Alert.objects.create(reason=reason, invite=self)
     self.save()
-    return;
+    return
 
   def save(self, *args, **kwargs):
     if not self.id:
@@ -50,7 +50,7 @@ class Invite(models.Model):
     clause = Q(name__startswith=query) | Q(informal_name__startswith=query)
     spacequery = ' '+query
     clause = clause | Q(name__contains=spacequery) | Q(informal_name__contains=spacequery)
-    return Invite.objects.all().filter(Q(rsvp=None), clause)
+    return Invite.objects.all().filter(clause)
 
 
 class Alert(models.Model):

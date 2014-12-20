@@ -12,5 +12,5 @@ urlpatterns = patterns('',
     # ex: /rsvp/search.json?q=Tom
     url(r'^search.json$', views.search, name='search'),
     # ex: /rsvp/thanks/
-    url(r'^thanks', views.thanks, name='thanks'),
+    url(r'^thanks', views.thanks, {'attending': True}, name='thanks'),
 )

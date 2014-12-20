@@ -36,8 +36,9 @@ def search(request):
 
   return HttpResponse(json.dumps(resultset))
 
-def thanks(request):
+def thanks(request, attending):
   context = RequestContext(request)
+  context['attending'] = attending
   rendered = render_to_response('thanks.html', context)
   return rendered
 
