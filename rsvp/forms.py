@@ -17,3 +17,11 @@ class InviteForm(forms.ModelForm):
       self.cleaned_data['attending'],
       self.cleaned_data['number_attending']
     )
+
+  def clean_attending(self):
+    attending = self.cleaned_data['attending']
+    if attending not in ['True', 'False']:
+      raise ValidationError('{0} is not a boolean'.format(value))
+    if attending == 'True':
+      return True
+    return False
