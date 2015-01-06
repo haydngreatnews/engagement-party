@@ -95,7 +95,8 @@ MANAGERS = ADMINS
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ['.libbyandhaydn.co.nz',
-                 '.haydnandlibby.co.nz']
+                 '.haydnandlibby.co.nz',
+                 't.libbyandhaydn.co.nz',]
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name

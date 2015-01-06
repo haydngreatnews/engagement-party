@@ -47,9 +47,9 @@ class Invite(models.Model):
     """Returns a queryset with all the invites
     where the name or informal_name starts with
     the query string"""
-    clause = Q(name__startswith=query) | Q(informal_name__startswith=query)
+    clause = Q(name__istartswith=query) | Q(informal_name__istartswith=query)
     spacequery = ' '+query
-    clause = clause | Q(name__contains=spacequery) | Q(informal_name__contains=spacequery)
+    clause = clause | Q(name__icontains=spacequery) | Q(informal_name__icontains=spacequery)
     return Invite.objects.all().filter(clause)
 
 

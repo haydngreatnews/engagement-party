@@ -4,7 +4,7 @@ from . import models
 
 class InviteAdmin(admin.ModelAdmin):
   exclude = ('rsvp', 'attending', 'number_attending')
-  list_display = ('name','informal_name', 'rsvp', 'number_attending')
+  list_display = ('name','informal_name', 'rsvp', 'attending', 'number_attending')
   #list_filter = ('
   search_fields = ['name', 'informal_name']
   readonly_fields = ('rsvp', 'attending', 'number_attending')
